@@ -14,6 +14,7 @@ public class ImageViewActivity extends Activity {
 		ImageView imageView = new ImageView(this);
 		
 		//Die Bild URI wird aus dem Intent geholt und imageView übergeben
+		// kommentar zum testen
 		imageView.setImageURI(intent.getData());
 		setContentView(imageView);
 		
