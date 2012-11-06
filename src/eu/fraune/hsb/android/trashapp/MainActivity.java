@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
     }
 
     @Override
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
     	startActivityForResult(intent, 5);
     }
 
+  
     
     /** Create a File for saving an image or video */
     private static File getOutputMediaFile(int type){
@@ -73,16 +75,24 @@ public class MainActivity extends Activity {
     
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 5;
     
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	Log.i("MainActivity", "onActivityResult wurde aufgerufen");
+    	
     	if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
-    		Toast.makeText(this,"Image Saved to:\n" + data.getData(),
-    				Toast.LENGTH_LONG).show();
+    		Log.i("MainActivity", "onActivityResult requestCode ist 5");
+    		
+    		// an der Stelle könnte auch erst überprüft werden, ob data null ist
+//    		Toast.makeText(this,"Image Saved to:\n" + data.getData().toString(),
+//    				Toast.LENGTH_LONG).show();
     		
     		Intent intent = new Intent(this,ImageViewActivity.class);
-    		intent.setData(data.getData());
+//    		intent.setData(data.getData());
+    		intent.putExtra("Uri", fileUri);
     		startActivity(intent);
     		
     	}else if (resultCode != CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
+    		Log.i("MainActivity", "onActivityResult requestCode ist NICHT  5");
     		Toast.makeText(this, "Canceled", Toast.LENGTH_LONG).show();
     	}
     }
