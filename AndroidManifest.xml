@@ -33,6 +33,8 @@
         <activity
             android:name=".ImageViewActivity"
             android:label="@string/title_imageViewActivity"/>
+        <service 
+            android:name=".GPSService"></service>
     </application>
 
 </manifest>
