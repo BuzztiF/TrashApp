@@ -3,6 +3,9 @@ package eu.fraune.hsb.android.trashapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,7 +26,7 @@ public class ImageViewActivity extends Activity implements LocationListener {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		Log.i("ImageViewActivity", "onCreate wurde aufgerufen"); 
-		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		Intent intent = getIntent();
 //		ImageView imageView = new ImageView(this);
@@ -36,7 +39,16 @@ public class ImageViewActivity extends Activity implements LocationListener {
 //		imageView.setImageURI(intent.getData());
 		if (intent.hasExtra("Uri")){
 				uri=(Uri)intent.getExtras().get("Uri");
-				imageView.setImageURI(uri);
+				
+				
+				Bitmap myBitmap = BitmapFactory.decodeFile(uri.getPath());
+				Log.i("BITMAPXXXXXXXXXXXXXXXX", myBitmap.getConfig().toString());
+				
+				
+		        imageView.setImageBitmap(myBitmap);
+				
+				
+//				imageView.setImageURI(uri);
 				
 				
 //				setContentView(imageView);
