@@ -120,13 +120,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 		}
 	}
 
-	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
 
 	}
 	
-	@Override
 	public void onSensorChanged(SensorEvent event) {
 		String A = Float.toString(event.values[2]);
 		String B= Float.toString(event.values[1]);  

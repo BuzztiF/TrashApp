@@ -22,12 +22,10 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 	  }
 
-	  @Override
 	  public final void onAccuracyChanged(Sensor sensor, int accuracy) {
 	    // Do something here if sensor accuracy changes.
 	  }
 
-	  @Override
 	  public final void onSensorChanged(SensorEvent event) {
 	    // The light sensor returns a single value.
 	    // Many sensors return 3 values, one for each axis.
