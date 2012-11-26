@@ -42,44 +42,34 @@ public class ImageViewActivity extends Activity implements LocationListener {
 		
 		
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 1, this);
+        
 		
 	}
 
-//	private void getCurrentGPSPosition() {
-//		// Acquire a reference to the system Location Manager
-//		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-//
-//		// Define a listener that responds to location updates
-//		LocationListener locationListener = new LocationListener() {
-//		    public void onLocationChanged(Location location) {
-//		      // Called when a new location is found by the network location provider.
-//		      Log.i("GPS IVA", Double.toString(location.getLatitude())+"geografische Breite"); 
-//		      Log.i("GPS IVA", Double.toString(location.getLongitude())+"geografische L�nge");
-//		      Toast.makeText(getApplicationContext(), "Breite: " + Double.toString(location.getLatitude()),
-//	    				Toast.LENGTH_LONG).show();
-//		      Toast.makeText(getApplicationContext(), "L�nge: " + Double.toString(location.getLongitude()),
-//	    				Toast.LENGTH_LONG).show();
-//		      
-//		    }
-//
-//		    public void onStatusChanged(String provider, int status, Bundle extras) {}
-//
-//		    public void onProviderEnabled(String provider) {}
-//
-//		    public void onProviderDisabled(String provider) {}
-//		  };
-//
-//		// Register the listener with the Location Manager to receive location updates
-//		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//		
-//	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 1, this);
+		Log.i("GPS", "GPSListener registriert");
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		lm.removeUpdates(this);
+		Log.i("GPS", "GPSListener wieder nicht mehr registriert");
+		
+	}
+	
 
 	public void onLocationChanged(Location location) {
 		Toast.makeText(getApplicationContext(), "IF Breite: " + Double.toString(location.getLatitude()),
 				Toast.LENGTH_LONG).show();
       Toast.makeText(getApplicationContext(), " IF L�nge: " + Double.toString(location.getLongitude()),
 				Toast.LENGTH_LONG).show();
+      
+      
 		
 	}
 
