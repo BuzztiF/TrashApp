@@ -23,10 +23,13 @@ public class ImageViewActivity extends Activity implements LocationListener {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		Log.i("ImageViewActivity", "onCreate wurde aufgerufen"); 
-		setContentView(R.layout.activity_imageview);
+		
 		
 		Intent intent = getIntent();
-		ImageView imageView = new ImageView(this);
+//		ImageView imageView = new ImageView(this);
+		
+		setContentView(R.layout.activity_imageview);
+		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		
 		//Die Bild URI wird aus dem Intent geholt und imageView übergeben
 	
@@ -34,8 +37,11 @@ public class ImageViewActivity extends Activity implements LocationListener {
 		if (intent.hasExtra("Uri")){
 				uri=(Uri)intent.getExtras().get("Uri");
 				imageView.setImageURI(uri);
-				setContentView(imageView);
+				
+				
+//				setContentView(imageView);
 		}
+		
 		
 //		getCurrentGPSPosition();
 		
