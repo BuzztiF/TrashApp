@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -28,6 +29,7 @@ public class ImageViewActivity extends Activity implements LocationListener {
 		Log.i("ImageViewActivity", "onCreate wurde aufgerufen"); 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
+		
 		Intent intent = getIntent();
 //		ImageView imageView = new ImageView(this);
 		
@@ -44,8 +46,9 @@ public class ImageViewActivity extends Activity implements LocationListener {
 				Bitmap myBitmap = BitmapFactory.decodeFile(uri.getPath());
 				Log.i("BITMAPXXXXXXXXXXXXXXXX", myBitmap.getConfig().toString());
 				
+				Bitmap rotatedBitmap = rotate(myBitmap, 90);
 				
-		        imageView.setImageBitmap(myBitmap);
+		        imageView.setImageBitmap(rotatedBitmap);
 				
 				
 //				imageView.setImageURI(uri);
@@ -62,6 +65,26 @@ public class ImageViewActivity extends Activity implements LocationListener {
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         
 		
+	}
+	
+	
+	private Bitmap rotate(Bitmap b, int degrees) {
+	    if (degrees != 0 && b != null) {
+	        Matrix m = new Matrix();
+
+	        m.setRotate(degrees, (float) b.getWidth() / 2, (float) b.getHeight() / 2);
+	        try {
+	            Bitmap b2 = Bitmap.createBitmap(
+	                    b, 0, 0, b.getWidth(), b.getHeight(), m, true);
+	            if (b != b2) {
+	                b.recycle();
+	                b = b2;
+	            }
+	        } catch (OutOfMemoryError ex) {
+	           throw ex;
+	        }
+	    }
+	    return b;
 	}
 
 	
