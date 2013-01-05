@@ -93,7 +93,8 @@ public class ImageViewActivity extends Activity implements LocationListener {
 	    }
 	    return b;
 	}
-
+	
+	
 	
 	@Override
 	protected void onResume() {
